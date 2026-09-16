@@ -6,7 +6,7 @@
     <meta name="theme-color" content="#0b0d10" />
     <meta name="description" content="Control personal de gastos y presupuesto." />
     <link rel="manifest" href="manifest.webmanifest" />
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="styles.css?v=3" />
     <title>Mi Bolsillo</title>
   </head>
   <body>
@@ -101,6 +101,16 @@
     </dialog>
 
     <template id="shortcut-template"><button class="shortcut"><span class="shortcut-icon"></span><span class="shortcut-name"></span><span class="shortcut-value"></span></button></template>
-    <script src="app.js"></script>
+
+    <script>
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register = () => Promise.resolve(null);
+        navigator.serviceWorker.getRegistrations().then(registrations =>
+          Promise.all(registrations.map(registration => registration.unregister()))
+        );
+      }
+      if ('caches' in window) caches.keys().then(keys => keys.forEach(key => caches.delete(key)));
+    </script>
+    <script src="app.js?v=3"></script>
   </body>
 </html>
