@@ -73,3 +73,12 @@
     <script src="app.js?v=3"></script>
   </body>
 </html>
+<script>
+  document.addEventListener('click', event => {
+    const button = event.target.closest('button[value="cancel"]');
+    if (button) {
+      event.preventDefault();
+      button.closest('dialog')?.close();
+    }
+  });
+</script></script>
