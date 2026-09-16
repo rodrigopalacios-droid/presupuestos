@@ -18,96 +18,55 @@
         </div>
         <button class="icon-button" id="settings-button" aria-label="Abrir ajustes">⚙</button>
       </header>
-
       <section class="balance-card" aria-label="Saldo actual">
         <p>Saldo actual</p>
         <strong id="current-balance">$0</strong>
         <span id="balance-detail">Ingresos $0 · Gastos $0</span>
       </section>
-
       <section class="metrics-grid" aria-label="Presupuesto">
-        <article class="metric-card accent">
-          <p>Disponible esta semana</p>
-          <strong id="weekly-available">$0</strong>
-          <span id="weekly-detail">Configurá tu presupuesto</span>
-        </article>
-        <article class="metric-card">
-          <p>Proyección a fin de mes</p>
-          <strong id="month-projection">$0</strong>
-          <span id="projection-detail">Sin movimientos todavía</span>
-        </article>
+        <article class="metric-card accent"><p>Disponible esta semana</p><strong id="weekly-available">$0</strong><span id="weekly-detail">Configurá tu presupuesto</span></article>
+        <article class="metric-card"><p>Proyección a fin de mes</p><strong id="month-projection">$0</strong><span id="projection-detail">Sin movimientos todavía</span></article>
       </section>
-
-      <section class="section-heading">
-        <div>
-          <p class="eyebrow">Registro rápido</p>
-          <h2>Tus atajos</h2>
-        </div>
-        <button class="text-button" id="edit-shortcuts">Editar</button>
-      </section>
+      <section class="section-heading"><div><p class="eyebrow">Registro rápido</p><h2>Tus atajos</h2></div><button class="text-button" id="edit-shortcuts">Editar</button></section>
       <section class="shortcuts" id="shortcuts" aria-label="Atajos de gastos"></section>
-
-      <section class="section-heading movements-heading">
-        <div>
-          <p class="eyebrow">Este mes</p>
-          <h2>Movimientos</h2>
-        </div>
-        <button class="text-button" id="view-all">Ver todos</button>
-      </section>
+      <section class="section-heading movements-heading"><div><p class="eyebrow">Este mes</p><h2>Movimientos</h2></div><button class="text-button" id="view-all">Ver todos</button></section>
       <section class="movements" id="movements" aria-live="polite"></section>
     </main>
-
     <button class="fab" id="add-movement" aria-label="Agregar movimiento">+</button>
-
     <dialog id="movement-dialog">
       <form method="dialog" id="movement-form">
-        <div class="dialog-header"><h2>Nuevo movimiento</h2><button class="icon-button" value="cancel" aria-label="Cerrar">×</button></div>
-        <div class="segmented" id="movement-type">
-          <button type="button" class="selected" data-type="expense">Gasto</button>
-          <button type="button" data-type="income">Ingreso</button>
-        </div>
+        <div class="dialog-header"><h2>Nuevo movimiento</h2><button class="icon-button" value="cancel" formnovalidate aria-label="Cerrar">×</button></div>
+        <div class="segmented" id="movement-type"><button type="button" class="selected" data-type="expense">Gasto</button><button type="button" data-type="income">Ingreso</button></div>
         <label>Descripción<input required id="movement-name" maxlength="40" placeholder="Ej. Cena con amigos" /></label>
         <label>Monto<input required id="movement-amount" type="number" min="0.01" step="0.01" inputmode="decimal" placeholder="0" /></label>
         <label class="currency-row">Moneda<select id="movement-currency"><option value="ARS">Pesos argentinos (ARS)</option><option value="USD">Dólares (USD)</option></select></label>
-        <p class="conversion-note" id="conversion-note"></p>
-        <label>Fecha<input required id="movement-date" type="date" /></label>
-        <div class="dialog-actions"><button value="cancel" class="secondary">Cancelar</button><button id="save-movement" value="default">Guardar</button></div>
+        <p class="conversion-note" id="conversion-note"></p><label>Fecha<input required id="movement-date" type="date" /></label>
+        <div class="dialog-actions"><button value="cancel" formnovalidate class="secondary">Cancelar</button><button id="save-movement" value="default">Guardar</button></div>
       </form>
     </dialog>
-
     <dialog id="settings-dialog">
       <form method="dialog" id="settings-form">
-        <div class="dialog-header"><h2>Ajustes</h2><button class="icon-button" value="cancel" aria-label="Cerrar">×</button></div>
+        <div class="dialog-header"><h2>Ajustes</h2><button class="icon-button" value="cancel" formnovalidate aria-label="Cerrar">×</button></div>
         <label>Presupuesto mensual<input id="monthly-budget" type="number" min="0" step="1" inputmode="numeric" placeholder="Ej. 800000" /></label>
         <label>Saldo inicial<input id="initial-balance" type="number" step="1" inputmode="numeric" placeholder="Ej. 0" /></label>
-        <div class="fixed-expenses">
-          <div class="fixed-title"><span>Gastos fijos mensuales</span><button type="button" class="text-button" id="add-fixed">+ Agregar</button></div>
-          <div id="fixed-editor"></div>
-          <p class="helper">Se reservan en la proyección hasta que los registres como gasto.</p>
-        </div>
+        <div class="fixed-expenses"><div class="fixed-title"><span>Gastos fijos mensuales</span><button type="button" class="text-button" id="add-fixed">+ Agregar</button></div><div id="fixed-editor"></div><p class="helper">Se reservan en la proyección hasta que los registres como gasto.</p></div>
         <label>Cotización del dólar<select id="dollar-type"><option value="blue">Dólar blue</option><option value="oficial">Dólar oficial</option><option value="bolsa">Dólar MEP</option></select></label>
         <div class="rate-box"><span id="dollar-rate">Cargando cotización…</span><button type="button" class="text-button" id="refresh-rate">Actualizar</button></div>
-        <div class="dialog-actions"><button value="cancel" class="secondary">Cancelar</button><button value="default">Guardar ajustes</button></div>
+        <div class="dialog-actions"><button value="cancel" formnovalidate class="secondary">Cancelar</button><button value="default">Guardar ajustes</button></div>
       </form>
     </dialog>
-
     <dialog id="shortcuts-dialog">
       <form method="dialog" id="shortcuts-form">
-        <div class="dialog-header"><h2>Configurar atajos</h2><button class="icon-button" value="cancel" aria-label="Cerrar">×</button></div>
-        <p class="helper">Elegí los gastos que querés registrar en un toque. Podés dejar vacíos los que no uses.</p>
-        <div id="shortcuts-editor"></div>
-        <div class="dialog-actions"><button value="cancel" class="secondary">Cancelar</button><button value="default">Guardar atajos</button></div>
+        <div class="dialog-header"><h2>Configurar atajos</h2><button class="icon-button" value="cancel" formnovalidate aria-label="Cerrar">×</button></div>
+        <p class="helper">Elegí los gastos que querés registrar en un toque. Podés dejar vacíos los que no uses.</p><div id="shortcuts-editor"></div>
+        <div class="dialog-actions"><button value="cancel" formnovalidate class="secondary">Cancelar</button><button value="default">Guardar atajos</button></div>
       </form>
     </dialog>
-
     <template id="shortcut-template"><button class="shortcut"><span class="shortcut-icon"></span><span class="shortcut-name"></span><span class="shortcut-value"></span></button></template>
-
     <script>
       if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register = () => Promise.resolve(null);
-        navigator.serviceWorker.getRegistrations().then(registrations =>
-          Promise.all(registrations.map(registration => registration.unregister()))
-        );
+        navigator.serviceWorker.getRegistrations().then(registrations => Promise.all(registrations.map(registration => registration.unregister())));
       }
       if ('caches' in window) caches.keys().then(keys => keys.forEach(key => caches.delete(key)));
     </script>
